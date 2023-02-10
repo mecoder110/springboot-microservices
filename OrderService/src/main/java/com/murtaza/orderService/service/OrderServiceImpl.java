@@ -1,6 +1,7 @@
 package com.murtaza.orderService.service;
 
 import com.murtaza.orderService.entity.Order;
+import com.murtaza.orderService.exception.CustomException;
 import com.murtaza.orderService.external.client.ProductClient;
 import com.murtaza.orderService.model.RequestOrder;
 import com.murtaza.orderService.repository.OrderRepository;
@@ -24,7 +25,9 @@ public class OrderServiceImpl implements OrderService {
         //  orderEntity -> save the data with StaatusOrder created;
         //Product Service - Block Products(Reduce the quantity)
         // Payment Service -> Payments -Success -COMPLETE, else Cancle
-
+        if (requestOrder.getQuantity()==0){
+            throw new CustomException("Please enter quantity greater than ZERO", "ZERO_QUANTITY_NOT_ACCEPTED" , 403);
+        }
         log.info("placing Order RequestOrder {}", requestOrder);
 
         productClient.reduceQuantity(requestOrder.getProductId(), requestOrder.getQuantity());

@@ -15,6 +15,10 @@ spring:
     database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
   config:
     import: configserver:http://localhost:9296
+
+
+  main:
+    allow-bean-definition-overriding: true
 #eureka:
 #  client:
 #    register-with-eureka: true

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class FeignConfig {
     @Bean
     ErrorDecoder errorDecoder(){
+        System.out.println("DECODER========================================");
         return new CustomErrorDecoder();
     }
 }
